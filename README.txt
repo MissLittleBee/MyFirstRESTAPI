@@ -1,42 +1,39 @@
-# Wikipedia Search API
+# API Wikipedie
 
-This Flask application serves as a simple Wikipedia search API. It allows users to query Wikipedia for information on a specific search term in a chosen language.
+Tato aplikace Flask slouží jako jednoduché API pro vyhledávání ve Wikipedii. Umožňuje uživatelům vyhledávat informace o Wikipedii na konkrétní hledaný výraz ve zvoleném jazyce.
 
-## Usage
+## Použití
 
-### Installation
+### Instalace
 
-1. Ensure you have Python 3.11 installed on your system.
-2. Install the required dependencies by running:
+1. Ujistěte se, že máte v systému nainstalován Python 3.11.
+2. Nainstalujte požadované závislosti spuštěním:
 
 
-### Running the Application
+### Spuštění aplikace
 
-Run the following command in the terminal:
+V terminálu spusťte následující příkaz:
 python api.py
 
-By default, the application will be accessible at `http://127.0.0.1:5000/`.
+Ve výchozím nastavení bude aplikace přístupná na adrese `http://127.0.0.1:5000/`.
 
-### API Endpoint
+#### Parametry požadavku
 
-- **Endpoint:** `/wiki/<string:search_term>`
-- **Method:** `GET`
+- `search_term` (povinné): Hledaný výraz, který se má vyhledat ve Wikipedii.
+- `lang` (nepovinné): Jazyk pro vyhledávání ve Wikipedii (výchozí je 'cs').
 
-#### Request Parameters
+#### Odpověď
 
-- `search_term` (required): The search term to look up on Wikipedia.
-- `lang` (optional): The language for the Wikipedia search (default is 'cs').
+- Pokud je nalezen přesný článek, vrátí první odstavec článku se stavovým kódem 200.
+- Pokud článek není nalezen, vrátí stav 404 s odpovědí JSON, která uvádí, že článek nebyl nalezen.
+- Pokud hledaný výraz existuje v jiných článcích, vrátí stav 303 s přesměrováním na výsledky vyhledávání ve Wikipedii pro daný výraz.
 
-#### Response
+## Zpracování chyb
 
-- If the exact article is found, it returns the first paragraph of the article with a status code of 200.
-- If the article is not found, it returns a 404 status with a JSON response indicating that the article was not found.
-- If the search term exists in other articles, it returns a 303 status with a redirection to the Wikipedia search results for that term.
+- V případě vnitřní chyby serveru během zpracování vrátí odpověď JSON se stavovým kódem 500.
 
-## Error Handling
+## Poznámka
 
-- In case of an internal server error during processing, it returns a JSON response with a 500 status code.
+- Tato aplikace používá k vyhledávání a získávání informací rozhraní API Wikipedie.
 
-## Note
-
-- This application uses the Wikipedia API for searching and extracting information.
+Translated with DeepL.com (free version)
